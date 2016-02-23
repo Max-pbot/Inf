@@ -58,7 +58,7 @@ local function pre_process(msg)
     -- No further checks
   return msg
   end
-  -- Useri k darhale sohbat kardan bod ban shod! !
+  -- Useri k darhale sohbat kardan bod ban shod!
   if msg.to.type == 'chat' then
     local data = load_data(_config.moderation.data)
     local group = msg.to.id
@@ -103,18 +103,18 @@ local function kick_ban_res(extra, success, result)
         if is_momod2(member_id, chat_id) and not is_admin2(sender) then
           return send_large_msg(receiver, "Shoma nemitavanid Moderatorha/Modir/Adminha ro Ban konid!")
         end
-        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] Ban shod!)
+        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] Ban shod!)'
         return ban_user(member_id, chat_id)
       elseif get_cmd == 'unban' then
-        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] UNBan shod!)
+        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] UNBan shod!)'
         local hash =  'banned:'..chat_id
         redis:srem(hash, member_id)
         return 'User '..user_id..' UNBan shod!
       elseif get_cmd == 'banall' then
-        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] GlobalBan shod!)
+        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] GlobalBan shod!)'
         return banall_user(member_id, chat_id)
       elseif get_cmd == 'unbanall' then
-        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] Az global UNBan shod!)
+        send_large_msg(receiver, 'User @'..member..' ['..member_id..'] Az global UNBan shod!)'
         return unbanall_user(member_id, chat_id)
       end
 end
