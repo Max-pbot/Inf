@@ -2,15 +2,15 @@ local function set_bot_photo(msg, success, result)
   local receiver = get_receiver(msg)
   if success then
     local file = 'data/photos/bot.jpg'
-    print('File downloaded to:', result)
+    print('File download shod be:', result)
     os.rename(result, file)
-    print('File moved to:', file)
+    print('File montaghel shod be:', file)
     set_profile_photo(file, ok_cb, false)
-    send_large_msg(receiver, 'Photo changed!', ok_cb, false)
+    send_large_msg(receiver, 'Ax avaz shod!', ok_cb, false)
     redis:del("bot:photo")
   else
-    print('Error downloading: '..msg.id)
-    send_large_msg(receiver, 'Failed, please try again!', ok_cb, false)
+    print('Khata! download: '..msg.id)
+    send_large_msg(receiver, 'Khata! lotfan dobare emtehan konid!!', ok_cb, false)
   end
 end
 local function parsed_url(link)
@@ -59,7 +59,7 @@ local function get_dialog_list_callback(cb_extra, success, result)
   for k,v in pairs(result) do
     if v.peer then
       if v.peer.type == "chat" then
-        text = text.."group{"..v.peer.title.."}["..v.peer.id.."]("..v.peer.members_num..")"
+        text = text.."Gorooh{"..v.peer.title.."}["..v.peer.id.."]("..v.peer.members_num..")"
       else
         if v.peer.print_name and v.peer.id then
           text = text.."user{"..v.peer.print_name.."}["..v.peer.id.."]"
@@ -108,7 +108,7 @@ end
 local function run(msg,matches)
     local data = load_data(_config.moderation.data)
     local receiver = get_receiver(msg)
-    local group = msg.to.id
+    local Gorooh = msg.to.id
     if not is_admin(msg) then
     	return
     end
@@ -121,7 +121,7 @@ local function run(msg,matches)
     end
     if matches[1] == "setbotphoto" then
     	redis:set("bot:photo", "waiting")
-    	return 'Please send me bot photo now'
+    	return 'Lotfan axe morede nazaretoon ra ersal konid!'
     end
     if matches[1] == "markread" then
     	if matches[2] == "on" then
@@ -140,16 +140,16 @@ local function run(msg,matches)
     end
     if matches[1] == "block" then
     	if is_admin2(matches[2]) then
-    		return "You can't block admins"
+    		return "Shoma nemitavanid adminha ra block konid!"
     	end
     	block_user("user#id"..matches[2],ok_cb,false)
-    	return "User blocked"
+    	return "Usere morede nazar block shod!"
     end
     if matches[1] == "unblock" then
     	unblock_user("user#id"..matches[2],ok_cb,false)
-    	return "User unblocked"
+    	return "Usere morede nazar UNblock shod!"
     end
-    if matches[1] == "import" then--join by group link
+    if matches[1] == "import" then--join by Gorooh link
     	local hash = parsed_url(matches[2])
     	import_chat_link(hash,ok_cb,false)
     end
