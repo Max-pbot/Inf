@@ -177,7 +177,7 @@ local function check_member_modrem(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-      return send_large_msg(receiver, 'Gorooh hazf shod!)
+      return send_large_msg(receiver, 'Gorooh hazf shod!')
     end
   end
 end
