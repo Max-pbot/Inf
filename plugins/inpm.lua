@@ -17,7 +17,7 @@ local function chat_list(msg)
     local data = load_data(_config.moderation.data)
         local groups = 'groups'
         if not data[tostring(groups)] then
-                return 'No groups at the moment'
+                return 'Goroohi vojood nadarad!'
         end
         local message = 'List of Groups:\n*Use /join (ID) to join*\n\n '
         for k,v in pairs(data[tostring(groups)]) do
@@ -28,7 +28,7 @@ local function chat_list(msg)
                         end
                 end
 
-                message = message .. '👥 '.. name .. ' (ID: ' .. v .. ')\n\n '
+                message = message .. '?? '.. name .. ' (ID: ' .. v .. ')\n\n '
         end
         local file = io.open("./groups/lists/listed_groups.txt", "w")
         file:write(message)
@@ -42,36 +42,36 @@ local function run(msg, matches)
 	 local data = load_data(_config.moderation.data)
     if matches[1] == 'join' and data[tostring(matches[2])] then
         if is_banned(msg.from.id, matches[2]) then
-	    return 'You are banned.'
+	    return 'Shoma ban shodeyid!.'
 	 end
       if is_gbanned(msg.from.id) then
-            return 'You are globally banned.'
+            return 'Shoma az global ban shodeyid!.'
       end
       if data[tostring(matches[2])]['settings']['lock_member'] == 'yes' and not is_owner2(msg.from.id, matches[2]) then
-        return 'Group is private.'
+        return 'Gorooh shakhsi ast!.'
       end
           local chat_id = "chat#id"..matches[2]
           local user_id = "user#id"..msg.from.id
-   	  chat_add_user(chat_id, user_id, ok_cb, false)   
-	  local group_name = data[tostring(matches[2])]['settings']['set_name']	
-	  return "Added you to chat:\n\n👥"..group_name.." (ID:"..matches[2]..")"
+   	  chat_add_user(chat_id, user_id, ok_cb, false)
+	  local group_name = data[tostring(matches[2])]['settings']['set_name']
+	  return "Shoma add shodid be:\n\n??"..group_name.." (ID:"..matches[2]..")"
         elseif matches[1] == 'join' and not data[tostring(matches[2])] then
-		
-         	return "Chat not found."
+
+         	return "Chate morede nazar yaft nashod!."
         end
      if matches[1] == 'chats'then
        if is_admin(msg) and msg.to.type == 'chat' then
          return chat_list(msg)
        elseif msg.to.type ~= 'chat' then
          return chat_list(msg)
-       end      
+       end
      end
      if matches[1] == 'chatlist'then
        if is_admin(msg) and msg.to.type == 'chat' then
          send_document("chat#id"..msg.from.id, "./groups/lists/listed_groups.txt", ok_cb, false)
        elseif msg.to.type ~= 'chat' then
-         send_document("user#id"..msg.from.id, "./groups/lists/listed_groups.txt", ok_cb, false) 
-       end      
+         send_document("user#id"..msg.from.id, "./groups/lists/listed_groups.txt", ok_cb, false)
+       end
      end
 end
 end
