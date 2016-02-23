@@ -8,13 +8,13 @@ local function run(msg, matches)
   end
   local data = load_data(_config.moderation.data)
   if data[tostring(msg.to.id)]['settings']['lock_arabic'] then
-    if data[tostring(msg.to.id)]['settings']['lock_arabic'] == 'yes' then
-      if antiarabic[msg.from.id] == true then 
+    if data[tostring(msg.to.id)]['settings']['lock_arabic'] == 'Faal!' then
+      if antiarabic[msg.from.id] == true then
         return
       end
-      send_large_msg("chat#id".. msg.to.id , "Arabic is not allowed here")
+      send_large_msg("chat#id".. msg.to.id , "Arabi harf zadan dar gorooh mojaz nist!")
       local name = user_print_name(msg.from)
-      savelog(msg.to.id, name.." ["..msg.from.id.."] kicked (arabic was locked) ")
+      savelog(msg.to.id, name.." ["..msg.from.id.."] Kick shod! (Arabic ghofl ast!) ")
       chat_del_user('chat#id'..msg.to.id,'user#id'..msg.from.id,ok_cb,false)
 		  antiarabic[msg.from.id] = true
       return
@@ -23,7 +23,7 @@ local function run(msg, matches)
   return
 end
 local function cron()
-  antiarabic = {} -- Clear antiarabic table 
+  antiarabic = {} -- Clear antiarabic table
 end
 return {
   patterns = {
