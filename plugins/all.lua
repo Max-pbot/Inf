@@ -18,7 +18,7 @@ local function chat_stats(chat_id)
     local user_info = get_msgs_user_chat(user_id, chat_id)
     table.insert(users_info, user_info)
   end
-  table.sort(users_info, function(a, b) 
+  table.sort(users_info, function(a, b)
       if a.msgs and b.msgs then
         return a.msgs > b.msgs
       end
@@ -34,7 +34,7 @@ local function get_group_type(target)
   local data = load_data(_config.moderation.data)
   local group_type = data[tostring(target)]['group_type']
     if not group_type or group_type == nil then
-       return 'No group type available.'
+       return 'Gorooh ba in esm dar dastres nist!.'
     end
       return group_type
 end
@@ -44,12 +44,12 @@ local function show_group_settings(target)
     if data[tostring(target)]['settings']['flood_msg_max'] then
       NUM_MSG_MAX = tonumber(data[tostring(target)]['settings']['flood_msg_max'])
       print('custom'..NUM_MSG_MAX)
-    else 
+    else
       NUM_MSG_MAX = 5
     end
   end
   local settings = data[tostring(target)]['settings']
-  local text = "Lock group name : "..settings.lock_name.."\nLock group photo : "..settings.lock_photo.."\nLock group member : "..settings.lock_member.."\nflood sensitivity : "..NUM_MSG_MAX
+  local text = "Ghofl kardane esme gorooh! : "..settings.lock_name.."\nLock group photo : "..settings.lock_photo.."\nLock group member : "..settings.lock_member.."\nflood sensitivity : "..NUM_MSG_MAX
   return text
 end
 
@@ -57,7 +57,7 @@ local function get_description(target)
   local data = load_data(_config.moderation.data)
   local data_cat = 'description'
   if not data[tostring(target)][data_cat] then
-    return 'No description available.'
+    return 'Etelaate gorooh dar dastres nist!.'
   end
   local about = data[tostring(target)][data_cat]
   return about
@@ -67,7 +67,7 @@ local function get_rules(target)
   local data = load_data(_config.moderation.data)
   local data_cat = 'rules'
   if not data[tostring(target)][data_cat] then
-    return 'No rules available.'
+    return 'Ghavanine gorooh dar dastres nist!.'
   end
   local rules = data[tostring(target)][data_cat]
   return rules
@@ -78,10 +78,10 @@ local function modlist(target)
   local data = load_data(_config.moderation.data)
   local groups = 'groups'
   if not data[tostring(groups)] or not data[tostring(groups)][tostring(target)] then
-    return 'Group is not added or is Realm.'
+    return 'Gorooh add nashode ast ya realm ast!.'
   end
   if next(data[tostring(target)]['moderators']) == nil then
-    return 'No moderator in this group.'
+    return 'Moderator dar in gorooh vojood nadarad!.'
   end
   local i = 1
   local message = '\nList of moderators :\n'
@@ -95,8 +95,8 @@ end
 local function get_link(target)
   local data = load_data(_config.moderation.data)
   local group_link = data[tostring(target)]['settings']['set_link']
-  if not group_link or group_link == nil then 
-    return "No link"
+  if not group_link or group_link == nil then
+    return "Link mojood nist! az dastoore /newlink baraye sakhte linke jadid estefade konid!"
   end
   return "Group link:\n"..group_link
 end
